@@ -50,8 +50,10 @@ class Moderador:
             self.est_mod=bool
             self.id_mod=0
 
-E=[None]*8
-M=['']*4
+E=None
+E=Estudiante()
+M=None
+M=Moderador()
 L= [[random.choice([0, 1]) for i in range(8)] for j in range(8)]
 R = ['']*4
 edades=[21,18,20,19,23,24]
@@ -81,40 +83,38 @@ def cargausuario(A,B):
                         # while cantest<4 or cantest>8:
                         #       cantmod=int(input('Cantidad de estudiantes ingresada fuera de rango, reintente (min 4 y max 8):'))
                         for i in range (cantest):
-                              A[i]=Estudiante()
-                        for i in range (cantest):
                             os.system("cls")
                             print('---Cargando datos del '+str(i+1)+'° estudiante ---\n')
-                            A[i].nombre=input('Ingrese nombre del '+str(i+1)+'° estudiante:')
-                            A[i].mail_est=input('Ingrese el mail del '+str(i+1)+'° estudiante:')
-                            A[i].psw_est=input("Ingrese la contraseña del "+str(i+1)+"° estudiante: ")
-                            A[i].est_estd=True
-                            # A[i].fechanacimiento=input("Ingrese el fecha de nacimieto del "+str(i+1)+"° estudiante (YYYY-MM-DD): ")
-                            # A[i].fechanacimiento = datetime.datetime.strptime(A[i].fechanacimiento, "%Y-%m-%d").date()
-                            # A[i].sexo=input("Ingrese el sexo del "+str(i+1)+"° estudiante: ")
-                            # A[i].hobby=input("Ingrese hobby del "+str(i+1)+"° estudiante: ")
-                            # A[i].biografia=input("Ingrese la biografía del "+str(i+1)+"° estudiante: ")
-                            # if (hoy.month, hoy.day) < (A[i].fechanacimiento.month, A[i].fechanacimiento.day):
-                            #     A[i].edad= str((hoy.year - A[i].fechanacimiento.year)-1)
+                            A.nombre=input('Ingrese nombre del '+str(i+1)+'° estudiante:')
+                            A.mail_est=input('Ingrese el mail del '+str(i+1)+'° estudiante:')
+                            A.psw_est=input("Ingrese la contraseña del "+str(i+1)+"° estudiante: ")
+                            A.est_estd=True
+                            # A.fechanacimiento=input("Ingrese el fecha de nacimieto del "+str(i+1)+"° estudiante (YYYY-MM-DD): ")
+                            # A.fechanacimiento = datetime.datetime.strptime(A.fechanacimiento, "%Y-%m-%d").date()
+                            # A.sexo=input("Ingrese el sexo del "+str(i+1)+"° estudiante: ")
+                            # A.hobby=input("Ingrese hobby del "+str(i+1)+"° estudiante: ")
+                            # A.biografia=input("Ingrese la biografía del "+str(i+1)+"° estudiante: ")
+                            # if (hoy.month, hoy.day) < (A.fechanacimiento.month, A.fechanacimiento.day):
+                            #     A.edad= str((hoy.year - A.fechanacimiento.year)-1)
                             # else:
-                            #     A[i].edad=str((hoy.year - A[i].fechanacimiento.year))
-                            # A[i].id_est=str(i)
+                            #     A.edad=str((hoy.year - A.fechanacimiento.year))
+                            # A.id_est=str(i)
+                            vla.seek(0,2)
+                            pickle.dump(A,vla)
+                            vla.flush()
                   case 2:
                         os.system("cls")
                         print('-----CARGANDO MODERADORES-----\n')
                         cantmod=int(input('Ingrese cantidad de moderadores a registrar(min 1 y max 4):'))
                         # while cantmod<1 or cantmod>4:
                         #       cantmod=int(input('Cantidad de moderadores ingresada fuera de rango, reintente (min 1 y max 4):'))
-                        for i in range(cantmod):
-                              B[i]=Moderador()
-                       
                         for i in range (cantmod):
                               os.system("cls")
                               print('---Cargando datos del moderador'+str(i+1)+'---\n')
-                              B[i].mail_mod=input("Ingrese el  mail del "+str(i+1)+"° moderador:")
-                              B[i].psw_mod=input("Ingrese la contraseña del "+str(i+1)+"° moderador:")
-                              B[i].est_mod=True
-                              B[i].id_mod=i
+                              B.mail_mod=input("Ingrese el  mail del "+str(i+1)+"° moderador:")
+                              B.psw_mod=input("Ingrese la contraseña del "+str(i+1)+"° moderador:")
+                              B.est_mod=True
+                              B.id_mod=i
 
 def inicio():
       global op
@@ -144,28 +144,28 @@ def inicio():
                             #         input()
                             #   else:
                                 login(E,M)
-                        case 3:
-                              os.system("cls")
-                              print('1-Bonus 1\n2-Bonus 2\n3-Salir')
-                              opb = int(input("\nIngrese su opcion: ")) 
-                              while (opb<1 or opb>3): 
-                                    print('Opcion incorrecta')
-                                    opb = int(input("Ingreso nuevamente la opcion ")) 
-                              match opb:
+                        # case 3:
+                        #       os.system("cls")
+                        #       print('1-Bonus 1\n2-Bonus 2\n3-Salir')
+                        #       opb = int(input("\nIngrese su opcion: ")) 
+                        #       while (opb<1 or opb>3): 
+                        #             print('Opcion incorrecta')
+                        #             opb = int(input("Ingreso nuevamente la opcion ")) 
+                        #       match opb:
 
-                                    case 1:
-                                          os.system("cls")
-                                          BONUS1(edades)
-                                    case 2:
-                                          os.system("cls")
-                                          if cantest<1:
-                                                print('No hay usuarios ingresados')
-                                                cartel2()
-                                                input()
-                                          else:
-                                                BONUS2(cantest)
-                                                cartel2()
-                                                input()
+                        #             case 1:
+                        #                   os.system("cls")
+                        #                   BONUS1(edades)
+                        #             case 2:
+                        #                   os.system("cls")
+                        #                   if cantest<1:
+                        #                         print('No hay usuarios ingresados')
+                        #                         cartel2()
+                        #                         input()
+                        #                   else:
+                        #                         BONUS2(cantest)
+                        #                         cartel2()
+                        #                         input()
                         
                         case 0: print('\n\n ---FIN DEL PROGRAMA---')        
 
